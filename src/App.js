@@ -24,13 +24,43 @@ class App extends React.Component {
     }
 
     getArticles = () => {
-      fetch(baseUrl + './articles').then(res => {
+      fetch(baseUrl + '/articles').then(res => {
         return res.json()
       }).then(data => {
         this.setState({
           articles: data,
         })
         console.log(this.state.articles)
+      })
+    }
+
+    addArticles = (newArticle) => {
+      const copyArticles = [...this.state.articles];
+      copyArticles.push(newArticle);
+      this.setState({
+        articles: copyArticles,
+      });
+    }
+
+
+
+
+    addLike = (article) => {
+      console.log(article)
+      fetch(baseUrl + '/articles/' + article._id, {
+        method: 'PUT',
+        body: JSON.stringify({ likes: article.likes + 1 }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(resJson => {
+        const copyArticles = [...this.state.articles]
+        const findIndex = this.state.articles.findIndex(article => article._id === resJson._id)
+        copyArticles[findIndex].likes = resJson.likes
+        this.setState({
+          articles: copyArticles
+        })
       })
     }
 
@@ -42,6 +72,24 @@ class App extends React.Component {
       return (
         <div className='container'>
          <h1>Post</h1>
+         <ArticleForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+         <table>
+           <tbody>
+             { this.state.articles.map(article => {
+                 return (
+                   <tr key={article._id}>
+                     <td onDoubleClick={() => this.toggleLiked(article)}
+                       className={ article.liked ? 'liked' : null }>{ article.title }
+                     </td>
+                     <td>{article.likes}</td>
+                     <td onClick={() => this.addLike(article)}>LIKE</td>
+                     <td onClick={() => this.delete(article._id)}>X</td>
+                   </tr>
+                 )
+               })
+             }
+           </tbody>
+         </table>
         </div>
       )
     }
