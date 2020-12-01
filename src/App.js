@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css';
+import ArticleForm from './components/ArticlesForm'
 
 
 
@@ -32,6 +33,11 @@ class App extends React.Component {
         console.log(this.state.articles)
       })
     }
+
+    componentDidMount(){
+    this.getArticles()
+  }
+
     render () {
       return (
         <div className='container'>
