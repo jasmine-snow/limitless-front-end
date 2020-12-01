@@ -63,6 +63,20 @@ class App extends React.Component {
         })
       })
     }
+    deleteArticle = (id) => {
+    console.log(id)
+    fetch(baseUrl + '/articles/' + id, {
+      method: 'DELETE'
+    }).then( response => {
+      const findIndex = this.state.articles.findIndex(article => article._id === id)
+      const copyArticles = [...this.state.articles]
+      copyArticles.splice(findIndex, 1)
+      this.setState({
+        articles: copyArticles
+      })
+    })
+  }
+
 
     componentDidMount(){
     this.getArticles()
@@ -78,16 +92,15 @@ class App extends React.Component {
              { this.state.articles.map(article => {
                  return (
                    <tr key={article._id}>
-                     <td onDoubleClick={() => this.toggleLiked(article)}
-                       className={ article.liked ? 'liked' : null }>{ article.title }
+                     <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
                      </td>
                      <td>{article.likes}</td>
-                     <td onClick={() => this.addLike(article)}>LIKE</td>
-                     <td onClick={() => this.delete(article._id)}>X</td>
+                     <td><button onClick={() => this.addLike(article)}>LIKE</button></td>
+                     <td><button onClick={() => this.deleteArticle(article._id)}>DELETE</button></td>
                    </tr>
-                 )
-               })
-             }
+                  )
+                })
+              }
            </tbody>
          </table>
         </div>
