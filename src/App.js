@@ -1,6 +1,8 @@
 import React from 'react'
 import './App.css';
 import ArticleForm from './components/ArticlesForm'
+import Register from './components/Register.jsx'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 
 
@@ -84,6 +86,11 @@ class App extends React.Component {
 
     render () {
       return (
+        <Switch>
+          <Route path='/register'>
+            <SignIn baseURL={baseURL} loginUser={this.loginUser}/>
+          </Route>
+        </Switch>
         <div className='container'>
          <h1>Post</h1>
          <ArticleForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
