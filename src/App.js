@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css';
 import ArticleForm from './components/ArticlesForm'
 import Register from './components/Register.jsx'
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 
 
@@ -86,9 +86,22 @@ class App extends React.Component {
 
     render () {
       return (
+        <Router>
+        <div>
+          <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+               <li>
+                 <Link to="/register">Register</Link>
+               </li>
+           </ul>
         <Switch>
-          <Route path='/register'>
-            <SignIn baseURL={baseURL} loginUser={this.loginUser}/>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/">
+            <App />
           </Route>
         </Switch>
         <div className='container'>
@@ -111,6 +124,8 @@ class App extends React.Component {
            </tbody>
          </table>
         </div>
+      </div>
+    </Router>
       )
     }
   }
