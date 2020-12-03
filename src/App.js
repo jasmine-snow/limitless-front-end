@@ -87,42 +87,50 @@ class App extends React.Component {
     render () {
       return (
         <Router>
-        <div>
-          <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-               <li>
-                 <Link to="/register">Register</Link>
-               </li>
-           </ul>
-        <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/">
-            <App />
-          </Route>
-        </Switch>
-        <div className='container'>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+                  <Link to="/ArticleForm">Post</Link>
+                <li>
+                </li>
+              </ul>
+            </nav>
+          <Switch>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/ArticlesForm">
+              <ArticleForm />
+            </Route>
+
+          </Switch>
+          <div className="container">
+         <Route path={"/ArticleForm" }>
          <h1>Post</h1>
-         <ArticleForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
-         <table>
-           <tbody>
-             { this.state.articles.map(article => {
-                 return (
-                   <tr key={article._id}>
-                     <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
-                     </td>
-                     <td>{article.likes}</td>
-                     <td><button onClick={() => this.addLike(article)}>LIKE</button></td>
-                     <td><button onClick={() => this.deleteArticle(article._id)}>DELETE</button></td>
-                   </tr>
-                  )
-                })
-              }
-           </tbody>
-         </table>
+           <ArticleForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+             <table>
+               <tbody>
+                 { this.state.articles.map(article => {
+                     return (
+                       <tr key={article._id}>
+                         <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
+                         </td>
+                         <td>{article.likes}</td>
+                         <td><button onClick={() => this.addLike(article)}>LIKE</button></td>
+                         <td><button onClick={() => this.deleteArticle(article._id)}>DELETE</button></td>
+                       </tr>
+                      )
+                    })
+                  }
+             </tbody>
+           </table>
+         </Route>
         </div>
       </div>
     </Router>

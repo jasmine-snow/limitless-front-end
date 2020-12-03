@@ -14,9 +14,14 @@ class Register extends Component {
       email: '',
       password: '',
       confirmPassword: '',
+      passwordError: false,
+      loggedInUserEmail: '',
+      loggedIn: false,
+      usernameAvailability: true,
       action: 'Login'
     }
   }
+
     switchForm = () => {
     if(this.state.action === "Login") {
       this.setState({ action: "Register" })
@@ -29,17 +34,54 @@ class Register extends Component {
       [event.target.name]: event.target.value
     })
   }
+
     handleSubmit = (event) => {
       event.preventDefault()
-      console.log(`You are trying to ${this.state.action.toLowerCase()} with the following credentials`)
-      console.log(this.state);
-
-      if(this.state.action === "Register") {
-         this.props.register(this.state)
-       } else {
-         this.props.login(this.state)
+      const url = process.env.REACT_APP_BASEURL + '/users/register'
+        if (this.state.password !== this.state.confirmPassword) {
+          this.setState({
+          passwordError: true
+          })
+          console.error("Passwords are not a match.")
+    } else {
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            credentials: 'include',
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword
+         }),
+         headers: {
+           'Content-Type': 'application/json'
+         }
+         }).then( res => {
+           return res.json()
+         }).then(user => {
+         console.log("The user is:", user)
+      })
+        if (this.state.action === "Register") {
+           this.setState({
+             loggedIn: true,
+             loggedInUserEmail: this.state.email
+           })
+           console.error()
+         }
        }
     }
+
+
+
+
+
+// add email already in use function
+
+// username already in use function
+
+
+
     render() {
       if (this.state.redirect)
     return <Redirect to='/' />
@@ -80,7 +122,6 @@ class Register extends Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}>
               </input>
-
           </form>
         </div>
        }
@@ -108,11 +149,11 @@ class Register extends Component {
            this.state.action === "Login"
            ?
            <p>
-             Need an account? Sign up <span className="fake-link" onClick={this.switchForm}>here</span>.
+             Need an account? Sign up <span className="fake-link" onClick={this.switchForm}><button>Register</button></span>.
            </p>
            :
            <p>
-             Already have an account? Log in <span className="fake-link" onClick={this.switchForm}>here</span>.
+             Already have an account? Log in <span className="fake-link" onClick={this.switchForm}><button>Login</button></span>.
            </p>
 
          }
