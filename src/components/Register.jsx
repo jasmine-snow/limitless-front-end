@@ -76,8 +76,8 @@ class Register extends Component {
 
 
     render() {
-      if (this.state.redirect)
-        return <Redirect to='/app' />
+      if (this.state.registered)
+        return <Redirect to='/home' />
           return (
              <div>
                <h2>{this.state.action} here</h2>

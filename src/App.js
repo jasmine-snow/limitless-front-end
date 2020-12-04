@@ -1,12 +1,15 @@
 import React from 'react'
 import './App.css';
-import ArticleForm from './components/ArticlesForm'
+import ArticlesForm from './components/ArticlesForm.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
+import Home from './components/Home.jsx'
+import Profile from './components/Profile.jsx'
+import { Feed, Icon } from 'semantic-ui-react'
+
+
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
-
 
 
 let baseUrl = ''
@@ -24,10 +27,14 @@ class App extends React.Component {
     super(props)
       this.state = {
         articles: [],
-        currentUser: null
-
+        email: '',
+        currentUser: null,
+        loggedInStatus: "Not logged in",
+        user: {}
       }
     }
+
+
 
     handleLogOut = (event) => {
       const url = process.env.REACT_APP_BASEURL + '/login/'
@@ -102,64 +109,106 @@ class App extends React.Component {
     this.getArticles()
   }
 
+  loginUser = (user) => {
+      this.setState({
+        currentUser: user
+    });
+  };
+
     render () {
       return (
         <Router>
           <div>
             <nav>
               <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-                <li>
-                <Link to="/Login" >Log In</Link>
-                </li>
-                <li>
-                <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
-                </li>
-                <li>
-                <Link to="/ArticleForm">Post</Link>
-                </li>
-              </ul>
-            </nav>
+                  <li className="navBar">
+                    <Link to="/home">Home</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/ArticleForm">Post</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/register">Register</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/Login">Log In</Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           <Switch>
+            <Route exact path={"/home"} render={props => (
+              <Home {... props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+            )}/>
+            <Route exactpath={"/Profile"} render={props => (
+              <Profile {... props} loggedInStatus={this.state.loggedInStatus}/>
+            )}/>
             <Route path="/register">
               <Register />
             </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
+            <Route exact path={"/login"} render={props=> (
+              <Login {... props} loggedInStatus={this.state.loggedInStatus}/>
+            )}/>
             <Route path="/ArticlesForm">
-              <ArticleForm />
+              <ArticlesForm />
             </Route>
-
           </Switch>
           <div className="container">
          <Route path={"/ArticleForm" }>
          <h1>Post</h1>
-           <ArticleForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+           <ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+           </Route>
+           <Route path={"/Home"}>
+
              <table>
                <tbody>
                  { this.state.articles.map(article => {
                      return (
-                       <tr key={article._id}>
-                         <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
-                         </td>
-                         <td>{article.likes}</td>
-                         <td><button onClick={() => this.addLike(article)}>LIKE</button></td>
-                         <td><button onClick={() => this.deleteArticle(article._id)}>DELETE</button></td>
-                       </tr>
+                       <Feed>
+                        <Feed.Event>
+                          <Feed.Label>
+                            </Feed.Label>
+                            <Feed.Content>
+                                <Feed.Summary>
+                                  <Feed.User>{this.username}</Feed.User>
+                                  { article.description }
+                                </Feed.Summary>
+                                <Feed.Meta>
+                                  <Feed.Like>
+                                    <Icon name='like'onClick={() => this.addLike(article)} />
+                                  </Feed.Like>
+                                </Feed.Meta>
+                              </Feed.Content>
+
+                             <tr key={article._id}>
+                               <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
+                               </td>
+                               <td>{article.likes}</td>
+                               <td><button onClick={() => this.deleteArticle(article._id)}>trash alternate outline</button></td>
+                             </tr>
+                          </Feed.Event>
+                       </Feed>
                       )
                     })
                   }
              </tbody>
            </table>
+
+
+          </Route>
+         <Route path={"/Login"}>
+            <Login baseUrl={ baseUrl } />
+         </Route>
+         <Route path={"/Register"}>
+            <Register baseUrl={ baseUrl } />
          </Route>
         </div>
-      </div>
     </Router>
       )
     }

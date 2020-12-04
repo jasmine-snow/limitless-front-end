@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ArticleForm extends Component {
+export default class ArticlesForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -51,17 +51,22 @@ export default class ArticleForm extends Component {
       description: event.target.value
     })
   }
+
   render() {
     return (
-      <form onSubmit={ (e) => this.handleSubmit(e)}>
-        <label htmlFor="title">Title: </label>
-        <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
-        <label htmlFor="img">Image: </label>
-        <input type="img" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
-        <label htmlFor="description">Description: </label>
-        <input type="description" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
-        <input type="submit" value="Add a post" />
-      </form>
+      <div>
+        <div>
+          <form onSubmit={ (e) => this.handleSubmit(e)}>
+            <label htmlFor="title">Title: </label>
+            <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
+            <label htmlFor="img">Image: </label>
+            <input type="img" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
+            <label htmlFor="description">Description: </label>
+            <input type="description" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
+            <input type="submit" value="Add a post" />
+          </form>
+        </div>
+      </div>
     )
   }
 }

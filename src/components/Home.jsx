@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import Register from './Register'
-
-
+import './css/Home.css'
+import { Feed, Icon } from 'semantic-ui-react'
 export default class Home extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       isLoggedIn: false,
@@ -18,21 +17,16 @@ export default class Home extends Component {
       description: '',
       likes: ''
     }
-  }
-
-  componentDidMount(){
-  this.getArticles()
 }
 
-  render () {
-    return (
-      <div>
-      <ul>
-      <li>
+render () {
+  return (
+    <div>
+      <h1>Home</h1>
+      <h3>Status: {this.props.loggedInStatus}</h3>
+      <h6>all post feed will be redirected here</h6>
+    </div>
+  )
+}
 
-      </li>
-      </ul>
-      </div>
-    )
-  }
 }

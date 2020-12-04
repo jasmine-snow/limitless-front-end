@@ -15,16 +15,15 @@ class Login extends Component {
       loggedIn: false,
       action: 'Login',
       errors: {}
+
     }
   }
 
-
-  handleChange = (event) => {
-  this.setState({
-    [event.target.name]: event.target.value
-  })
-}
-
+    handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
     handleLoginSubmit = (event) => {
       event.preventDefault()
@@ -40,6 +39,9 @@ class Login extends Component {
           'Content-Type': 'application/json'
         }
         }).then(res => {
+          if (this.state.email === this.state.loggedIn) {
+          this.props.handleSuccessfulLogin(res.data)
+        }
           return res.json()
         }).then(user => {
           console.log("logging in:", user)
@@ -51,12 +53,12 @@ class Login extends Component {
             console.error()
           }
         })
-      }
-      
+    }
+
 
   render() {
     if (this.state.loggedIn)
-      return <Redirect to='/app' />
+      return <Redirect to='/home' />
         return (
            <div>
              <h2>{this.state.action} here</h2>
