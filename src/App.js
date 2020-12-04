@@ -2,6 +2,8 @@ import React from 'react'
 import './App.css';
 import ArticleForm from './components/ArticlesForm'
 import Register from './components/Register.jsx'
+import Login from './components/Login.jsx'
+
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 
@@ -21,8 +23,23 @@ class App extends React.Component {
   constructor(props) {
     super(props)
       this.state = {
-        articles: []
+        articles: [],
+        currentUser: null
+
       }
+    }
+
+    handleLogOut = (event) => {
+      const url = process.env.REACT_APP_BASEURL + '/login/'
+      fetch(url, {
+        method: 'DELETE',
+      }).then(res => {
+        if (this.state.action === "logout") {
+          this.setState({
+            currentUser: null
+          })
+        }
+      })
     }
 
     getArticles = () => {
@@ -80,6 +97,7 @@ class App extends React.Component {
   }
 
 
+
     componentDidMount(){
     this.getArticles()
   }
@@ -96,14 +114,23 @@ class App extends React.Component {
                 <li>
                   <Link to="/register">Register</Link>
                 </li>
-                  <Link to="/ArticleForm">Post</Link>
                 <li>
+                <Link to="/Login" >Log In</Link>
+                </li>
+                <li>
+                <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
+                </li>
+                <li>
+                <Link to="/ArticleForm">Post</Link>
                 </li>
               </ul>
             </nav>
           <Switch>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="/ArticlesForm">
               <ArticleForm />
