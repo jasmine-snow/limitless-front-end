@@ -1,3 +1,14 @@
-body {
-  background-color: #bbbbbb;
+.home-name {
+  position: relative;
+  font-size: 300%;
+  font-family: 'Thasadith', 'Fredericka the Great', sans-serif;
+  margin: 8% 50% 5% 2%;
 }
+/* .container {
+  background-color: #fcf8ec;
+}
+
+.home-container {
+  background-color: #fcf8ec;
+
+} */

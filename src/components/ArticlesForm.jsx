@@ -9,6 +9,7 @@ export default class ArticlesForm extends Component {
       description: '',
     }
   }
+  
 
   handleSubmit (event) {
     event.preventDefault()
@@ -60,7 +61,7 @@ export default class ArticlesForm extends Component {
             <label htmlFor="title">Title: </label>
             <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
             <label htmlFor="img">Image: </label>
-            <input type="img" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
+            <input type="text" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
             <label htmlFor="description">Description: </label>
             <input type="description" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
             <input type="submit" value="Add a post" />

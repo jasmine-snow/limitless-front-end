@@ -5,7 +5,7 @@ import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import Home from './components/Home.jsx'
 import Profile from './components/Profile.jsx'
-import { Feed, Icon } from 'semantic-ui-react'
+import { Card, Image, Feed, Icon } from 'semantic-ui-react'
 
 
 
@@ -68,9 +68,6 @@ class App extends React.Component {
       });
     }
 
-
-
-
     addLike = (article) => {
       console.log(article)
       fetch(baseUrl + '/articles/' + article._id, {
@@ -109,18 +106,22 @@ class App extends React.Component {
     this.getArticles()
   }
 
-  loginUser = (user) => {
+  loginUser = (username) => {
       this.setState({
-        currentUser: user
+        currentUser: username
     });
   };
 
     render () {
       return (
         <Router>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Thasadith&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+        </style>
           <div>
             <nav>
-              <ul>
+              <ul className="nav">
                   <li className="navBar">
                     <Link to="/home">Home</Link>
                   </li>
@@ -131,13 +132,13 @@ class App extends React.Component {
                     <Link to="/ArticleForm">Post</Link>
                   </li>
                   <li className="navBar">
-                    <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
-                  </li>
-                  <li className="navBar">
                     <Link to="/register">Register</Link>
                   </li>
                   <li className="navBar">
                     <Link to="/Login">Log In</Link>
+                  </li>
+                  <li className="navBar">
+                    <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
                   </li>
                 </ul>
               </nav>
@@ -165,43 +166,42 @@ class App extends React.Component {
            <ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
            </Route>
            <Route path={"/Home"}>
-
-             <table>
-               <tbody>
-                 { this.state.articles.map(article => {
-                     return (
-                       <Feed>
-                        <Feed.Event>
-                          <Feed.Label>
-                            </Feed.Label>
-                            <Feed.Content>
-                                <Feed.Summary>
-                                  <Feed.User>{this.username}</Feed.User>
-                                  { article.description }
-                                </Feed.Summary>
-                                <Feed.Meta>
-                                  <Feed.Like>
-                                    <Icon name='like'onClick={() => this.addLike(article)} />
-                                  </Feed.Like>
-                                </Feed.Meta>
-                              </Feed.Content>
-
-                             <tr key={article._id}>
-                               <td onDoubleClick={() => this.getArticles(article)}>{ article.title }
-                               </td>
-                               <td>{article.likes}</td>
-                               <td><button onClick={() => this.deleteArticle(article._id)}>trash alternate outline</button></td>
-                             </tr>
-                          </Feed.Event>
-                       </Feed>
+          <div className="cards-Group">
+           <Card.Group  itemsPerRow={4} stackable>
+                { this.state.articles.map(article => {
+                  return (
+                   <Card color='teal' key={article._id}>
+                    <div className="article-card">
+                      <Card.Content>
+                        <Card.Header>{this.props.username}</Card.Header>
+                            <Card.Description>
+                            <img className="img_size" src={article.img}  alt={`${this.props.username} name`} />
+                              <table className="img-description">
+                                <tr key={article._id} className="feed-table">
+                                  <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
+                                    <h3> { article.title } </h3>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td className="feed-td">
+                                    { article.description }
+                                  </td>
+                                </tr>
+                              </table>
+                              </Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                            <span className="like">{ article.likes } <Icon name='like' onClick={() => this.addLike(article)} /> </span>
+                              <Icon className="delete-icon" name='delete' onClick={() => this.deleteArticle(article._id)} />
+                            </Card.Content>
+                          </div>
+                      </Card>
                       )
-                    })
-                  }
-             </tbody>
-           </table>
-
-
-          </Route>
+                  })
+              }
+            </Card.Group>
+          </div>
+        </Route>
          <Route path={"/Login"}>
             <Login baseUrl={ baseUrl } />
          </Route>

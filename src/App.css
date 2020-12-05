@@ -1,5 +1,49 @@
-.navBar {
+.nav {
   position: relative;
-  display: inline-block;
-  margin: 0 0 1% 5%;
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: #456268;
+  margin: 0 0 0 0;
+}
+
+.navBar {
+  font-size: 120%;
+  float: left;
+  font-family: 'Thasadith', 'Fredericka the Great', sans-serif;
+}
+
+.navBar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.like {
+  margin: 1% 0 0 4% ;
+}
+
+.navBar a:hover:not(.active) {
+  background-color: #79a3b1;
+}
+
+.cards-Group {
+  margin: 3% 3%;
+}
+
+.img_size {
+  position: relative;
+  margin: 20% 20%;
+  padding: 0 0;
+  width: 200px;
+  height: 200px;
+}
+
+.img-description {
+  text-align: left;
+}
+body {
+  background-color: #394867;
 }

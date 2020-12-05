@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './css/Home.css'
-import { Feed, Icon } from 'semantic-ui-react'
+import { Image, Feed, Icon } from 'semantic-ui-react'
 export default class Home extends Component {
   constructor(props) {
     super(props)
@@ -17,16 +17,19 @@ export default class Home extends Component {
       description: '',
       likes: ''
     }
-}
-
-render () {
-  return (
-    <div>
-      <h1>Home</h1>
-      <h3>Status: {this.props.loggedInStatus}</h3>
-      <h6>all post feed will be redirected here</h6>
-    </div>
-  )
-}
+    const src = './img/puzzle.png'
 
 }
+// <h3>Status: {this.props.loggedInStatus}</h3>
+
+    render () {
+      return (
+        <nav className="home-container">
+          <div >
+            <h1 className="home-name">LimitLess</h1>
+            <Image src={'./img/puzzle.png'} size='mini' />
+          </div>
+        </nav>
+      )
+    }
+  }
