@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter, Redirect} from 'react-router-dom';
+import { Form, Button } from 'semantic-ui-react'
 
 
 
@@ -31,8 +32,8 @@ class Login extends Component {
       const url = process.env.REACT_APP_BASEURL + '/login'
       fetch(url, {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({
-          credentials: 'include',
           email: this.state.email,
           password: this.state.password
         }),
@@ -61,39 +62,45 @@ class Login extends Component {
     if (this.state.loggedIn)
       return <Redirect to='/home' />
         return (
-           <div>
+           <div className="loginContainer">
              <h2>{this.state.action} here</h2>
-             <form onSubmit={this.handleLoginSubmit}>
              {
               this.state.action === "Login"
               &&
-                <div>
-                  <label>Email:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter a email"
-                      value={this.state.email}
-                      onChange={this.handleChange}>
-                    </input>
-                 <label>Password:</label>
-                   <input
-                     type="password"
-                     name="password"
-                     placeholder="Enter a password"
-                     value={this.state.password}
-                     onChange={this.handleChange}>
-                   </input>
-               <button type="Submit">
-                 { this.state.action === "Login"}
-                 Login
-               </button>
-            </div>
-            }
-        </form>
+              <Form onSubmit={this.handleLoginSubmit}>
+                <Form.Group>
+                   <Form.Field>
+                      <label>Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder='Enter a email'
+                        width={8}
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                          />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Password</label>
+                     <input
+                      type="password"
+                      name="password"
+                      placeholder='Enter a password'
+                      width={8}
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                       />
+                 </Form.Field>
+              <Button type='submit'>
+              { this.state.action === "Login"}
+              Submit
+              </Button>
+            </Form.Group>
+        </Form>
+        }
       </div>
     )
-}
+  }
 }
 
   export default withRouter(Login);

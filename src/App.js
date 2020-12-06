@@ -28,6 +28,7 @@ class App extends React.Component {
       this.state = {
         articles: [],
         email: '',
+        username: '',
         currentUser: null,
         loggedInStatus: "Not logged in",
         user: {}
@@ -86,6 +87,7 @@ class App extends React.Component {
         })
       })
     }
+
     deleteArticle = (id) => {
     console.log(id)
     fetch(baseUrl + '/articles/' + id, {
@@ -169,11 +171,12 @@ class App extends React.Component {
           <div className="cards-Group">
            <Card.Group  itemsPerRow={4} stackable>
                 { this.state.articles.map(article => {
+                  console.log(article)
                   return (
                    <Card color='teal' key={article._id}>
                     <div className="article-card">
                       <Card.Content>
-                        <Card.Header>{this.props.username}</Card.Header>
+                        <Card.Header>{'article.user.username'}</Card.Header>
                             <Card.Description>
                             <img className="img_size" src={article.img}  alt={`${this.props.username} name`} />
                               <table className="img-description">

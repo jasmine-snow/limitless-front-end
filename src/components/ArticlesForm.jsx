@@ -4,18 +4,22 @@ export default class ArticlesForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      currentUser: '',
+      username: '',
       title: '',
       img: '',
       description: '',
     }
   }
-  
+
 
   handleSubmit (event) {
     event.preventDefault()
     fetch(this.props.baseUrl + '/articles', {
       method: 'POST',
+      credentials: "include",
       body: JSON.stringify({
+        username: this.state.username,
         title: this.state.title,
         img: this.state.img,
         description: this.state.description
@@ -28,12 +32,18 @@ export default class ArticlesForm extends Component {
     }).then( data => {
       this.props.addArticles(data)
       this.setState({
+    
+        username: '',
         title: '',
         img: '',
         description: ''
       })
     }).catch (error => console.error({'Error': error}))
   }
+
+
+
+
   handleTitleChange (event) {
     console.log(event.target.value)
     this.setState({
@@ -53,7 +63,9 @@ export default class ArticlesForm extends Component {
     })
   }
 
+
   render() {
+
     return (
       <div>
         <div>
