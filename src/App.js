@@ -4,9 +4,9 @@ import ArticlesForm from './components/ArticlesForm.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import Home from './components/Home.jsx'
-import Profile from './components/Profile.jsx'
-import { Card, Image, Feed, Icon } from 'semantic-ui-react'
-
+// import Profile from './components/Profile.jsx'
+import { Card, Icon } from 'semantic-ui-react'
+import puzzle_moms from './components/img/puzzle_moms.jpg';
 
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
@@ -118,49 +118,40 @@ class App extends React.Component {
       return (
         <Router>
         <style>
+          @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Thasadith&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
         </style>
           <div>
+          <div className="beforeNav">
+            <img className="mainImage" src={puzzle_moms} alt={`${this.props.username} mainImage`} />
+            <p className="mainLabel">LimitLess</p>
+            <hr/>
+          </div>
             <nav>
               <ul className="nav">
-                  <li className="navBar">
-                    <Link to="/home">Home</Link>
-                  </li>
-                  <li className="navBar">
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li className="navBar">
-                    <Link to="/ArticleForm">Post</Link>
-                  </li>
-                  <li className="navBar">
-                    <Link to="/register">Register</Link>
-                  </li>
-                  <li className="navBar">
-                    <Link to="/Login">Log In</Link>
-                  </li>
-                  <li className="navBar">
-                    <Link to="/LogOut" onClick={this.handleLogOut}>Log Out</Link>
-                  </li>
+                    <Link className="navBar" to="/home">Home</Link>
+                    <Link className="navBar" to="/ArticleForm">Post</Link>
+                    <Link className="navBar" to="/register">Register</Link>
+                    <Link className="navBar" to="/Login">Log In</Link>
+                    <Link className="navBar" to="/login" onClick={this.handleLogOut}>Log Out</Link>
                 </ul>
               </nav>
             </div>
           <Switch>
             <Route exact path={"/home"} render={props => (
-              <Home {... props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+              <Home {... props} />
             )}/>
-            <Route exactpath={"/Profile"} render={props => (
-              <Profile {... props} loggedInStatus={this.state.loggedInStatus}/>
+            <Route exact path={"/register"} render={props=> (
+              <Register {... props} />
             )}/>
-            <Route path="/register">
-              <Register />
-            </Route>
             <Route exact path={"/login"} render={props=> (
-              <Login {... props} loggedInStatus={this.state.loggedInStatus}/>
+              <Login {... props} />
             )}/>
             <Route path="/ArticlesForm">
               <ArticlesForm />
             </Route>
+
           </Switch>
           <div className="container">
          <Route path={"/ArticleForm" }>
@@ -173,12 +164,12 @@ class App extends React.Component {
                 { this.state.articles.map(article => {
                   console.log(article)
                   return (
-                   <Card color='teal' key={article._id}>
+                   <Card color='blue' key={article._id}>
                     <div className="article-card">
                       <Card.Content>
                         <Card.Header>{'article.user.username'}</Card.Header>
                             <Card.Description>
-                            <img className="img_size" src={article.img}  alt={`${this.props.username} name`} />
+                            <img className="img_size" src={article.img}  alt={`${this.props.username} img_size`} />
                               <table className="img-description">
                                 <tr key={article._id} className="feed-table">
                                   <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
@@ -205,12 +196,8 @@ class App extends React.Component {
             </Card.Group>
           </div>
         </Route>
-         <Route path={"/Login"}>
-            <Login baseUrl={ baseUrl } />
-         </Route>
-         <Route path={"/Register"}>
-            <Register baseUrl={ baseUrl } />
-         </Route>
+
+
         </div>
     </Router>
       )

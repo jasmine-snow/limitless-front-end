@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Form, Button } from 'semantic-ui-react'
+
 
 export default class ArticlesForm extends Component {
   constructor (props) {
@@ -32,7 +34,7 @@ export default class ArticlesForm extends Component {
     }).then( data => {
       this.props.addArticles(data)
       this.setState({
-    
+
         username: '',
         title: '',
         img: '',
@@ -40,9 +42,6 @@ export default class ArticlesForm extends Component {
       })
     }).catch (error => console.error({'Error': error}))
   }
-
-
-
 
   handleTitleChange (event) {
     console.log(event.target.value)
@@ -63,21 +62,31 @@ export default class ArticlesForm extends Component {
     })
   }
 
-
   render() {
 
     return (
       <div>
         <div>
-          <form onSubmit={ (e) => this.handleSubmit(e)}>
+          <Form onSubmit={ (e) => this.handleSubmit(e)}>
+          <Form.Field>
             <label htmlFor="title">Title: </label>
             <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
+          </Form.Field>
+          <Form.Field>
             <label htmlFor="img">Image: </label>
             <input type="text" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
+          </Form.Field>
+          <Form.Field>
             <label htmlFor="description">Description: </label>
             <input type="description" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
-            <input type="submit" value="Add a post" />
-          </form>
+          </Form.Field>
+          <Form.Field>
+            <Button type="submit" >
+              Submit
+            </Button>
+         </Form.Field>
+
+          </Form>
         </div>
       </div>
     )

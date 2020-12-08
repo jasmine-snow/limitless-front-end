@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Redirect} from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react'
+import added_puzzle from './img/added_puzzle.jpg';
 
 
 
@@ -16,10 +17,12 @@ class Login extends Component {
       loggedInUserEmail: '',
       loggedIn: false,
       action: 'Login',
-      errors: {}
+      errors: {},
 
     }
+
   }
+
 
     handleChange = (event) => {
     this.setState({
@@ -62,45 +65,51 @@ class Login extends Component {
     if (this.state.loggedIn)
       return <Redirect to='/home' />
         return (
-           <div className="loginContainer">
-             <h2>{this.state.action} here</h2>
-             {
-              this.state.action === "Login"
-              &&
-              <Form onSubmit={this.handleLoginSubmit}>
-                <Form.Group>
-                   <Form.Field>
+             <div className="loginContainer">
+               <div className="loginBackground">
+               </div>
+               {
+                this.state.action === "Login"
+                &&
+                <Form className="loginForm" onSubmit={this.handleLoginSubmit}>
+                  <Form.Group>
+                    <Form.Field>
                       <label>Email</label>
                       <input
                         type="email"
                         name="email"
                         placeholder='Enter a email'
-                        width={8}
+                        width={10}
                         value={this.state.email}
-                        onChange={this.handleChange}
-                          />
-                  </Form.Field>
+                        onChange={this.handleChange} />
+                    </Form.Field>
+                  </Form.Group>
+                <Form.Group>
                   <Form.Field>
                     <label>Password</label>
-                     <input
+                    <input
                       type="password"
                       name="password"
                       placeholder='Enter a password'
-                      width={8}
+                      width={10}
                       value={this.state.password}
-                      onChange={this.handleChange}
-                       />
-                 </Form.Field>
-              <Button type='submit'>
-              { this.state.action === "Login"}
-              Submit
-              </Button>
-            </Form.Group>
-        </Form>
-        }
+                      onChange={this.handleChange} />
+                   </Form.Field>
+              </Form.Group>
+                <Form.Field>
+                  <Button compact type='submit'>
+                    { this.state.action === "Login"}
+                    Submit
+                  </Button>
+               </Form.Field>
+          </Form>
+          }
+          <div>
+            <img className="added_puzzle" src={added_puzzle} alt={`${this.props.username} added_puzzle`} />
+          </div>
       </div>
     )
   }
 }
 
-  export default withRouter(Login);
+export default withRouter(Login);

@@ -1,44 +1,68 @@
+hr {
+  height:1px;
+  color:#000;
+  background-color:#000;
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.mainLabel {
+  font-family: 'Raleway', sans-serif;
+
+  text-align: center;
+  margin: 0 0 1% 0;
+  font-size: 300%;
+
+}
+
+.mainImage {
+  width: 7%;
+  height: 7%;
+  margin: 0 46%;
+
+}
+
 .nav {
-  position: relative;
+  display: inline;
   list-style-type: none;
-  padding: 0;
   overflow: hidden;
-  background-color: #456268;
-  margin: 0 0 0 0;
+  margin: 10px 0 0 40%;
+  opacity: .5;
+  float: none;
+  position: absolute;
 }
 
 .navBar {
   font-size: 120%;
-  float: left;
   font-family: 'Thasadith', 'Fredericka the Great', sans-serif;
 }
 
-.navBar a {
-  display: block;
-  color: white;
+.navBar  {
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-}
-
-.like {
-  margin: 1% 0 0 4% ;
 }
 
 .navBar a:hover:not(.active) {
   background-color: #79a3b1;
 }
 
+.like {
+  margin: 1% 0 0 4% ;
+}
+
 .cards-Group {
-  margin: 3% 3%;
+  margin: 2% 3%;
+  padding: 10% 0 1% 1%;
 }
 
 .img_size {
   position: relative;
   margin: 20% 20%;
-  padding: 0 0;
-  width: 200px;
-  height: 200px;
+  width: 65%;
+  height: 90%;
 }
 
 .img-description {
