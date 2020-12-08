@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
+import moms_dads_puzzles from './img/moms_dads_puzzles.jpg';
+
 
 
 export default class ArticlesForm extends Component {
@@ -34,7 +36,6 @@ export default class ArticlesForm extends Component {
     }).then( data => {
       this.props.addArticles(data)
       this.setState({
-
         username: '',
         title: '',
         img: '',
@@ -63,30 +64,37 @@ export default class ArticlesForm extends Component {
   }
 
   render() {
-
     return (
       <div>
         <div>
-          <Form onSubmit={ (e) => this.handleSubmit(e)}>
-          <Form.Field>
-            <label htmlFor="title">Title: </label>
-            <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="img">Image: </label>
-            <input type="text" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="description">Description: </label>
-            <input type="description" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
-          </Form.Field>
-          <Form.Field>
-            <Button type="submit" >
-              Submit
-            </Button>
-         </Form.Field>
+            <div className="post_background">
+            </div>
+            <div>
+              <img className="added_puzzle_two" src={moms_dads_puzzles} alt={` added_puzzle_two`} />
+            </div>
+            <div className="addedText">
+              <h2>Post an Article or a thought!</h2>
 
-          </Form>
+            </div>
+            <Form className="ArticleForm" onSubmit={ (e) => this.handleSubmit(e)}>
+                <Form.Field>
+                  <label htmlFor="title">Title: </label>
+                  <input type="text" id="title" onChange={ (e) => this.handleTitleChange(e) } value={ this.state.title } />
+                </Form.Field>
+                <Form.Field>
+                  <label htmlFor="img">URL: </label>
+                  <input type="text" id="img" onChange={ (e) => this.handleImgChange(e) } value={ this.state.img }/>
+                </Form.Field>
+                <Form.Field>
+                  <label htmlFor="description">Description: </label>
+                  <input type="text" id="discription" onChange={ (e) => this.handleDescriptionChange(e) } value={ this.state.description }/>
+                </Form.Field>
+                <Form.Field>
+                  <Button type="submit" >
+                    Submit
+                  </Button>
+               </Form.Field>
+            </Form>
         </div>
       </div>
     )

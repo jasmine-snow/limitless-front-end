@@ -4,7 +4,7 @@ import ArticlesForm from './components/ArticlesForm.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import Home from './components/Home.jsx'
-// import Profile from './components/Profile.jsx'
+import Show from './components/Show.jsx'
 import { Card, Icon } from 'semantic-ui-react'
 import puzzle_moms from './components/img/puzzle_moms.jpg';
 
@@ -60,6 +60,7 @@ class App extends React.Component {
         console.log(this.state.articles)
       })
     }
+
 
     addArticles = (newArticle) => {
       const copyArticles = [...this.state.articles];
@@ -118,9 +119,9 @@ class App extends React.Component {
       return (
         <Router>
         <style>
+          @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Thasadith&display=swap');
-          @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
         </style>
           <div>
           <div className="beforeNav">
@@ -148,58 +149,66 @@ class App extends React.Component {
             <Route exact path={"/login"} render={props=> (
               <Login {... props} />
             )}/>
-            <Route path="/ArticlesForm">
-              <ArticlesForm />
-            </Route>
+            <Route exact path={"/ArticlesForm"} render={props=> (
+              <ArticlesForm {... props} />
+            )}/>
 
+            <Route exact path={"/Show"} render={props=> (
+              <Show {... props} />
+            )}/>
           </Switch>
-          <div className="container">
-         <Route path={"/ArticleForm" }>
-         <h1>Post</h1>
-           <ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
-           </Route>
-           <Route path={"/Home"}>
-          <div className="cards-Group">
-           <Card.Group  itemsPerRow={4} stackable>
-                { this.state.articles.map(article => {
-                  console.log(article)
-                  return (
-                   <Card color='blue' key={article._id}>
-                    <div className="article-card">
-                      <Card.Content>
-                        <Card.Header>{'article.user.username'}</Card.Header>
-                            <Card.Description>
-                            <img className="img_size" src={article.img}  alt={`${this.props.username} img_size`} />
-                              <table className="img-description">
-                                <tr key={article._id} className="feed-table">
-                                  <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
-                                    <h3> { article.title } </h3>
-                                  </th>
-                                </tr>
-                                <tr>
-                                  <td className="feed-td">
-                                    { article.description }
-                                  </td>
-                                </tr>
-                              </table>
-                              </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                            <span className="like">{ article.likes } <Icon name='like' onClick={() => this.addLike(article)} /> </span>
-                              <Icon className="delete-icon" name='delete' onClick={() => this.deleteArticle(article._id)} />
-                            </Card.Content>
-                          </div>
-                      </Card>
-                      )
-                  })
-              }
-            </Card.Group>
-          </div>
-        </Route>
+      <div className="container">
+<Route path={"/ArticleForm" }>
+<ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+</Route>
+<Route path={"/Home"}>
+<div className="cards-Group">
+<Card.Group  itemsPerRow={4} stackable>
+{ this.state.articles.map(article => {
+console.log(article)
+return (
+<Card color='blue' key={article._id}>
+<div className="article-card">
+<Card.Content>
+    <Card.Description>
+    <img className="img_size" src={article.img}  alt={`${this.props.username} img_size`} />
+      <table className="img-description">
+        <tr key={article._id} className="feed-table">
+          <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
+          <Link to={{
+                pathname: "/Show",
+                title: article.title,
+                description: article.description,
+                img: article.img
+              }}>
+            <p>{article.title}</p>
+            </Link>
+          </th>
+        </tr>
+        <tr>
+            <td className="feed-td">
+              { article.description }
+            </td>
+        </tr>
+      </table>
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+    <span className="like">{ article.likes } <Icon name='like' onClick={() => this.addLike(article)} /> </span>
+      <Icon className="delete-icon" name='delete' onClick={() => this.deleteArticle(article._id)} />
+    </Card.Content>
+  </div>
+</Card>
+)
+})
+}
+</Card.Group>
+</div>
+</Route>
 
 
-        </div>
-    </Router>
+</div>
+</Router>
       )
     }
   }

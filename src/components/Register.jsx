@@ -86,6 +86,8 @@ class Register extends Component {
                <img className="collab_puzzle" src={collab_puzzle} alt={`${this.props.username} collab_puzzle`} />
              </div>
                <Form className="registerForm" onSubmit={this.handleRegisterSubmit}>
+               <h1 className="registerHeader">Register</h1>
+
                {
                 this.state.action === "Register"
                 &&

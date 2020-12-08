@@ -7,13 +7,14 @@ hr {
   margin: 0 auto;
 }
 
+.postTitle {
+  color: black;
+}
 .mainLabel {
   font-family: 'Raleway', sans-serif;
-
   text-align: center;
   margin: 0 0 1% 0;
   font-size: 300%;
-
 }
 
 .mainImage {
@@ -27,7 +28,7 @@ hr {
   display: inline;
   list-style-type: none;
   overflow: hidden;
-  margin: 10px 0 0 40%;
+  margin: 10px 0 0 34%;
   opacity: .5;
   float: none;
   position: absolute;
@@ -68,6 +69,7 @@ hr {
 .img-description {
   text-align: left;
 }
+
 body {
   background-color: #394867;
 }

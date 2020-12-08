@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, Redirect} from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react'
 import added_puzzle from './img/added_puzzle.jpg';
-
+import puzzle_login_image from './img/puzzle_login_image.jpg';
 
 
 class Login extends Component {
@@ -66,15 +66,19 @@ class Login extends Component {
       return <Redirect to='/home' />
         return (
              <div className="loginContainer">
+             <img className="puzzle_login_image" src={puzzle_login_image} alt={`${this.props.username} added_puzzle`} />
+
                <div className="loginBackground">
                </div>
                {
                 this.state.action === "Login"
                 &&
+
                 <Form className="loginForm" onSubmit={this.handleLoginSubmit}>
+                <h1 className="loginHeader">Login</h1>
                   <Form.Group>
                     <Form.Field>
-                      <label>Email</label>
+                      <label>Email:</label>
                       <input
                         type="email"
                         name="email"
@@ -86,7 +90,7 @@ class Login extends Component {
                   </Form.Group>
                 <Form.Group>
                   <Form.Field>
-                    <label>Password</label>
+                    <label>Password:</label>
                     <input
                       type="password"
                       name="password"

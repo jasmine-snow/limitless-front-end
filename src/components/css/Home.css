@@ -4,40 +4,46 @@
   font-family: 'Thasadith', 'Fredericka the Great', sans-serif;
   margin: 8% 20% 5% 2%;
 }
-/* .container {
-  background-color: #fcf8ec;
-}
 
-.home-container {
-  background-color: #fcf8ec;
-
-} */
-/* .loginContainer {
-  width: 400px;
-  height: 400px;
-} */
-
-.loginBackground {
+/* .loginBackground {
   background-color: #d0e8f2;
   position: absolute;
-  opacity: .6;
+  opacity: .3;
   height: 50%;
-  width: 25%;
-  margin: 0 0 0 39%;
+  width: 30%;
+  margin: 3% 0 0 10%;
   border-radius: 10px;
+} */
+
+.loginHeader {
+  font-family: 'Alegreya Sans', sans-serif;
+  margin: 0 0 3% 0;
 }
 
 .loginForm {
-  position: relative;
-  margin: 5% 20% 0 46%;
+  position: absolute;
+  margin: 5% 0 0 20%;
   padding-top: 7%;
 }
 
 .added_puzzle {
+  position: absolute;
   width: 20%;
   height: 20%;
-  opacity: .2;
+  opacity: .1;
 
+}
+
+.puzzle_login_image {
+  position: absolute;
+  margin: 0 0 0 50%;
+  width: 45%;
+  height: 45%;
+}
+
+.registerHeader {
+  font-family: 'Alegreya Sans', sans-serif;
+  margin: 0 0 3% 0;
 }
 
 .registerForm {
@@ -62,4 +68,33 @@
   margin: 3% 0 0 0;
   opacity: .7;
   position: absolute;
+}
+
+.ArticleForm {
+  position: absolute;
+  margin: 4% 40% 0 35%;
+  padding-top: 7%;
+}
+
+/* .post_background {
+  margin: 15% 0 0 60%;
+  width: 40%;
+  height: 60%;
+  position: absolute;
+} */
+
+ .added_puzzle_two {
+   position: absolute;
+   width: 35%;
+   height: 60%;
+   /* opacity: .3; */
+   margin: 2% 0 0 0;
+   border-radius: 10px;
+ }
+
+.addedText {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  margin: 10% 0 0 70%;
 }
