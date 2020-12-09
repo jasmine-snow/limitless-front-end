@@ -70,6 +70,7 @@ class App extends React.Component {
       });
     }
 
+
     addLike = (article) => {
       console.log(article)
       fetch(baseUrl + '/articles/' + article._id, {
