@@ -12,10 +12,10 @@ import puzzle_moms from './components/img/puzzle_moms.jpg';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 
-let baseUrl = ''
+let baseUrl;
 
 if (process.env.NODE_ENV === 'development') {
-  baseUrl = 'http://localhost:3003'
+  baseUrl = 'http://localhost:' + process.env.REACT_APP_PORT;
 } else {
   baseUrl = 'your heroku bakend url here'
 }
@@ -34,17 +34,31 @@ class App extends React.Component {
 
 
 
-    getArticles = () => {
-      fetch(baseUrl + '/articles').then(res => {
-        return res.json()
-      }).then(data => {
-        this.setState({
-          articles: data,
+    // getArticles = () => {
+    //   fetch(baseUrl + '/articles').then(res => {
+    //     return res.json()
+    //   }).then(data => {
+    //     this.setState({
+    //       articles: data,
+    //     })
+    //     console.log(this.state.articles)
+    //   })
+    // }
+    getArticles = async () => {
+      try {
+        await fetch(baseUrl + "/articles").then(res => {
+          return res.json();
+        }).then(articleData => {
+          console.log(articleData);
+          this.setState({
+            articles: articleData
+          })
         })
-        console.log(this.state.articles)
-      })
-    }
-
+      }
+      catch(error) {
+        console.log(error);
+      }
+    };
 
 
     componentDidMount(){
