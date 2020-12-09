@@ -17,7 +17,6 @@ class Login extends Component {
       loggedInUserEmail: '',
       loggedIn: false,
       action: 'Login',
-      errors: {},
 
     }
 
@@ -56,8 +55,8 @@ class Login extends Component {
                 loggedInUserEmail: this.state.email
               })
             console.error()
-          }
-        })
+          } 
+       })
     }
 
 

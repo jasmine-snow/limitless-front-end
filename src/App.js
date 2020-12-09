@@ -28,13 +28,28 @@ class App extends React.Component {
       this.state = {
         articles: [],
         email: '',
-        username: '',
-        currentUser: null,
-        loggedInStatus: "Not logged in",
-        user: {}
+        currentUser: ''
       }
     }
 
+
+
+    getArticles = () => {
+      fetch(baseUrl + '/articles').then(res => {
+        return res.json()
+      }).then(data => {
+        this.setState({
+          articles: data,
+        })
+        console.log(this.state.articles)
+      })
+    }
+
+
+
+    componentDidMount(){
+    this.getArticles()
+  }
 
 
     handleLogOut = (event) => {
@@ -49,18 +64,6 @@ class App extends React.Component {
         }
       })
     }
-
-    getArticles = () => {
-      fetch(baseUrl + '/articles').then(res => {
-        return res.json()
-      }).then(data => {
-        this.setState({
-          articles: data,
-        })
-        console.log(this.state.articles)
-      })
-    }
-
 
     addArticles = (newArticle) => {
       const copyArticles = [...this.state.articles];
@@ -90,6 +93,7 @@ class App extends React.Component {
       })
     }
 
+
     deleteArticle = (id) => {
     console.log(id)
     fetch(baseUrl + '/articles/' + id, {
@@ -105,111 +109,105 @@ class App extends React.Component {
   }
 
 
-
-    componentDidMount(){
-    this.getArticles()
-  }
-
-  loginUser = (username) => {
-      this.setState({
-        currentUser: username
-    });
-  };
-
     render () {
       return (
         <Router>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
-          @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
-          @import url('https://fonts.googleapis.com/css2?family=Thasadith&display=swap');
-        </style>
-          <div>
-          <div className="beforeNav">
-            <img className="mainImage" src={puzzle_moms} alt={`${this.props.username} mainImage`} />
-            <p className="mainLabel">LimitLess</p>
-            <hr/>
-          </div>
-            <nav>
-              <ul className="nav">
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
+              @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+              @import url('https://fonts.googleapis.com/css2?family=Thasadith&display=swap');
+            </style>
+            <div>
+              <div className="beforeNav">
+                <img className="mainImage" src={puzzle_moms} alt={`${this.props.username} mainImage`} />
+                <p className="mainLabel">LimitLess</p>
+                <hr/>
+              </div>
+              <nav>
+                <ul className="nav">
                     <Link className="navBar" to="/home">Home</Link>
                     <Link className="navBar" to="/ArticleForm">Post</Link>
                     <Link className="navBar" to="/register">Register</Link>
                     <Link className="navBar" to="/Login">Log In</Link>
                     <Link className="navBar" to="/login" onClick={this.handleLogOut}>Log Out</Link>
-                </ul>
-              </nav>
-            </div>
+                  </ul>
+                </nav>
+              </div>
           <Switch>
-            <Route exact path={"/home"} render={props => (
-              <Home {... props} />
-            )}/>
-            <Route exact path={"/register"} render={props=> (
-              <Register {... props} />
-            )}/>
-            <Route exact path={"/login"} render={props=> (
-              <Login {... props} />
-            )}/>
-            <Route exact path={"/ArticlesForm"} render={props=> (
-              <ArticlesForm {... props} />
-            )}/>
-
-            <Route exact path={"/Show"} render={props=> (
-              <Show {... props} />
-            )}/>
+              <Route exact path={"/home"} render={props => (
+                <Home {... props} />
+              )}/>
+              <Route exact path={"/register"} render={props=> (
+                <Register {... props} />
+              )}/>
+              <Route exact path={"/login"} render={props=> (
+                <Login {... props} />
+              )}/>
+              <Route exact path={"/ArticlesForm"} render={props=> (
+                <ArticlesForm {... props} />
+              )}/>
+              <Route exact path={"/Show"} render={props=> (
+                <Show {... props} />
+              )}/>
           </Switch>
-      <div className="container">
-<Route path={"/ArticleForm" }>
-<ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
-</Route>
-<Route path={"/Home"}>
-<div className="cards-Group">
-<Card.Group  itemsPerRow={4} stackable>
-{ this.state.articles.map(article => {
-console.log(article)
-return (
-<Card color='blue' key={article._id}>
-<div className="article-card">
-<Card.Content>
-    <Card.Description>
-    <img className="img_size" src={article.img}  alt={`${this.props.username} img_size`} />
-      <table className="img-description">
-        <tr key={article._id} className="feed-table">
-          <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
-          <Link to={{
-                pathname: "/Show",
-                title: article.title,
-                description: article.description,
-                img: article.img
-              }}>
-            <p>{article.title}</p>
-            </Link>
-          </th>
-        </tr>
-        <tr>
-            <td className="feed-td">
-              { article.description }
-            </td>
-        </tr>
-      </table>
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-    <span className="like">{ article.likes } <Icon name='like' onClick={() => this.addLike(article)} /> </span>
-      <Icon className="delete-icon" name='delete' onClick={() => this.deleteArticle(article._id)} />
-    </Card.Content>
-  </div>
-</Card>
-)
-})
-}
-</Card.Group>
-</div>
-</Route>
+          <div className="container">
+            <Route path={"/ArticleForm" }>
+              <ArticlesForm baseUrl={ baseUrl } addArticles={ this.addArticles }/>
+            </Route>
+            <Route path={"/Home"}>
+              <div className="cards-Group">
+                <Card.Group  itemsPerRow={4} stackable>
+                  { this.state.articles.map(article => {
+                    console.log(article)
+                    return (
 
+                      <Card color='blue' key={article._id}>
 
-</div>
-</Router>
+                        <div className="article-card">
+                          <Card.Content>
+                            <Card.Description>
+                              <img className="img_size" src={article.img}  alt={`${this.props.username} img_size`} />
+                              <table className="img-description">
+                                <thead key={article._id} className="feed-table">
+                                  <th onDoubleClick={() => this.getArticles(article)} className="feed-td">
+                                    <Link to={{
+                                        pathname: "/Show",
+                                        title: article.title,
+                                        description: article.description,
+                                        img: article.img
+                                        }}>
+                                        <p>{article.title}</p>
+                                    </Link>
+                                  </th>
+                                </thead>
+                                <tbody>
+                                  <td className="feed-td">
+                                    { article.description }
+                                  </td>
+                                </tbody>
+                              </table>
+                            </Card.Description>
+                          </Card.Content>
+                          <Card.Content extra>
+                            <span className="like">{ article.likes }
+                              <Icon name='like'
+                              onClick={() => this.addLike(article)} />
+                            </span>
+                              <Icon
+                                className="delete-icon"
+                                name='delete'
+                                onClick={() => this.deleteArticle(article._id)} />
+                        </Card.Content>
+                      </div>
+                    </Card>
+                    )
+                  })
+                }
+              </Card.Group>
+            </div>
+          </Route>
+        </div>
+      </Router>
       )
     }
   }

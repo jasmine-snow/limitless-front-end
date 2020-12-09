@@ -64,7 +64,10 @@ export default class ArticlesForm extends Component {
   }
 
   render() {
+    
     return (
+
+
       <div>
         <div>
             <div className="post_background">
