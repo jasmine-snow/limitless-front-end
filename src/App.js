@@ -34,31 +34,31 @@ class App extends React.Component {
 
 
 
-    // getArticles = () => {
-    //   fetch(baseUrl + '/articles').then(res => {
-    //     return res.json()
-    //   }).then(data => {
-    //     this.setState({
-    //       articles: data,
-    //     })
-    //     console.log(this.state.articles)
-    //   })
-    // }
-    getArticles = async () => {
-      try {
-        await fetch(baseUrl + "/articles").then(res => {
-          return res.json();
-        }).then(articleData => {
-          console.log(articleData);
-          this.setState({
-            articles: articleData
-          })
+    getArticles = () => {
+      fetch(baseUrl + '/articles').then(res => {
+        return res.json()
+      }).then(data => {
+        this.setState({
+          articles: data,
         })
-      }
-      catch(error) {
-        console.log(error);
-      }
-    };
+        console.log(this.state.articles)
+      })
+    }
+    // getArticles = async () => {
+    //   try {
+    //     await fetch(baseUrl + "/articles").then(res => {
+    //       return res.json();
+    //     }).then(articleData => {
+    //       console.log(articleData);
+    //       this.setState({
+    //         articles: articleData
+    //       })
+    //     })
+    //   }
+    //   catch(error) {
+    //     console.log(error);
+    //   }
+    // };
 
 
     componentDidMount(){
