@@ -17,7 +17,7 @@ let baseUrl = ''
 if (process.env.NODE_ENV === 'development') {
   baseUrl = process.env.REACT_APP_BASEURL;
 } else {
-  baseUrl = 'https://limitless-backend.herokuapp.com/';
+  baseUrl = 'https://limitless-backend.herokuapp.com';
 }
 console.log('base URL:', baseUrl)
 
