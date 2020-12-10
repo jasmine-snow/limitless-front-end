@@ -5,16 +5,6 @@
   margin: 8% 20% 5% 2%;
 }
 
-/* .loginBackground {
-  background-color: #d0e8f2;
-  position: absolute;
-  opacity: .3;
-  height: 50%;
-  width: 30%;
-  margin: 3% 0 0 10%;
-  border-radius: 10px;
-} */
-
 .loginHeader {
   font-family: 'Alegreya Sans', sans-serif;
   margin: 0 0 3% 0;
@@ -75,13 +65,6 @@
   margin: 4% 40% 0 35%;
   padding-top: 7%;
 }
-
-/* .post_background {
-  margin: 15% 0 0 60%;
-  width: 40%;
-  height: 60%;
-  position: absolute;
-} */
 
  .added_puzzle_two {
    position: absolute;
