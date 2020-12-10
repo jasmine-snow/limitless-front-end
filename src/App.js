@@ -17,7 +17,7 @@ let baseUrl;
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:' + process.env.REACT_APP_PORT;
 } else {
-  baseUrl = 'your heroku bakend url here'
+  baseUrl = 'https://limitless-backend.herokuapp.com/'
 }
 console.log('base URL:', baseUrl)
 
