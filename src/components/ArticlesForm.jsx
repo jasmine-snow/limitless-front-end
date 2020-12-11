@@ -84,7 +84,7 @@ export default class ArticlesForm extends Component {
               <img className="added_puzzle_two" src={moms_dads_puzzles} alt={` added_puzzle_two`} />
             </div>
             <div className="addedText">
-              <h2>Post an Article or a thought!</h2>
+              <p className="addedText">Post an Article or a thought!</p>
 
             </div>
             <Form className="ArticleForm" onSubmit={ (e) => this.handleSubmit(e)}>
