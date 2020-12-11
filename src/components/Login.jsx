@@ -61,7 +61,7 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn)
-      return <Redirect to='/home' />
+      return <Redirect to='/ArticleForm' />
         return (
              <div className="loginContainer">
              <img className="puzzle_login_image" src={puzzle_login_image} alt={`${this.props.username} added_puzzle`} />

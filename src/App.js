@@ -125,10 +125,9 @@ class App extends React.Component {
               </div>
               <nav>
                 <ul className="nav">
-
-                    <Link className="navBar" to="/home"></Link>
+                    <Link className="navBar" to="/ArticleForm"></Link>
                     <Link className="navBar" to="/Start">Home</Link>
-                    <Link className="navBar" to="/ArticleForm">Post</Link>
+                    <Link className="navBar" to="/home">Feed</Link>
                     <Link className="navBar" to="/register">Register</Link>
                     <Link className="navBar" to="/Login">Log In</Link>
                     <Link className="navBar" to="/login" onClick={this.handleLogOut}>Log Out</Link>
