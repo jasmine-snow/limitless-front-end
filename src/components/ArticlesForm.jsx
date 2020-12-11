@@ -19,6 +19,14 @@ export default class ArticlesForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
+    const object = {
+      username: this.state.username,
+      title: this.state.title,
+      img: this.state.img,
+      description: this.state.description
+     }
+     console.log("uri:", this.props.baseUrl)
+     console.log("this is the object:", object)
     fetch(this.props.baseUrl + '/articles', {
       method: 'POST',
       credentials: "include",

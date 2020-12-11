@@ -4,6 +4,7 @@ import ArticlesForm from './components/ArticlesForm.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import Home from './components/Home.jsx'
+import Start from './components/Start.jsx'
 import Show from './components/Show.jsx'
 import { Card, Icon } from 'semantic-ui-react'
 import puzzle_moms from './components/img/puzzle_moms.jpg';
@@ -124,7 +125,9 @@ class App extends React.Component {
               </div>
               <nav>
                 <ul className="nav">
-                    <Link className="navBar" to="/home">Home</Link>
+
+                    <Link className="navBar" to="/home"></Link>
+                    <Link className="navBar" to="/Start">Home</Link>
                     <Link className="navBar" to="/ArticleForm">Post</Link>
                     <Link className="navBar" to="/register">Register</Link>
                     <Link className="navBar" to="/Login">Log In</Link>
@@ -133,7 +136,7 @@ class App extends React.Component {
                 </nav>
               </div>
           <Switch>
-              <Route exact path={"/home"} render={props => (
+              <Route exact path={"/"} render={props => (
                 <Home {... props} />
               )}/>
               <Route exact path={"/register"} render={props=> (
@@ -147,6 +150,9 @@ class App extends React.Component {
               )}/>
               <Route exact path={"/Show"} render={props=> (
                 <Show {... props} />
+              )}/>
+              <Route exact path={"/Start"} render={props=> (
+                <Start {... props} />
               )}/>
           </Switch>
           <div className="container">
