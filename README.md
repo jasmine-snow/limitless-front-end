@@ -7,19 +7,28 @@ LimitLess is a full stack CRUD application built with Mern Stack and React as a 
 
 ## Screenshots!
 
+
+
 ### Home
 ![one](./img/1.png)
+
+
 
 ### Post
 ![two](./img/2.png)
 
+
+
 ### Login
 ![three](./img/3.png)
+
+
 
 ### Feed
 ![four](./img/4.png)
 
-/Users/jasmine/desktop/ga/project_4/img
+
+
 ### Technologies
 
 * Mern Stack
