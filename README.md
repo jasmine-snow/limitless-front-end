@@ -66,20 +66,20 @@ https://github.com/jasmine-snow/limitless-backend
 ![one](./img/screenshots1.png)
 
 ### Register Up
-![two](./img/screenshots1.png)
+![two](./img/screenshots2.png)
 
 ### Feed
-![three](./img/screenshots1.png)
+![three](./img/screenshots3.png)
 
 ### Show
-![four](./img/screenshots1.png)
+![four](./img/screenshots4.png)
 
 
 
 
 
 ## Resources:
-  * General Assembly 
+  * General Assembly
   * https://www.youtube.com/watch?v=47OqlhksNIA&app=desktop
   * https://onury.io/accesscontrol/?content=guide
   * https://soshace.com/implementing-role-based-access-control-in-a-node-js-application/
